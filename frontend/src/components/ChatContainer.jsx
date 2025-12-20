@@ -16,12 +16,12 @@ function ChatContainer({selectedUser,setSelectedUser}) {
         <img onClick={()=> setSelectedUser(null)} src={assets.arrow_icon} alt="Call Icon" className="md:hidden max-w-7"/>
         <img src={assets.help_icon} alt="Help Icon" className="w-5 h-5 cursor-pointer opacity-80 hover:opacity-100 transition" />
       </div>
-      {/* --chat messages -- */}
+      {/* --chat area -- */}
       <div className='flex flex-col h-[calc(100%-120px)] overflow-y-scroll p-3 pb-6'>
          {messagesDummyData.map((msg,index)=>(
           <div key={index} className={`flex items-end gap-2 justify-end ${msg.senderId !== '680f50e4f10f3cd28382ecf9' && 'flex-row-reverse'}`}>
               {msg.image ? (
-                 <img src={msg.image} alt="" className='max-w-[230px] border border-gray-700 rounded-lg overflow-hidden mb-8'/>
+                 <img src={assets.image} alt="" className='max-w-[230px] border border-gray-700 rounded-lg overflow-hidden mb-8'/>
               ):(
                 <p className={`p-2 max-w-[200px] md:text-sm font-light
                   rounded-lg mb-8 break-all bg-voilet-500/30 text-white ${msg.senderId == '680f50e4f10f3cd28382ecf9' ? 'rounded-br-none' : 'rounded-bl-none'}`}>{msg.text}</p>

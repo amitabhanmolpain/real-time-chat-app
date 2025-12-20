@@ -39,6 +39,7 @@ const Sidebar = ({ selectedUser, setSelectedUser }) => {
               </p>
             </div>
           </div>
+          
         </div>
 
         <div
@@ -58,6 +59,7 @@ const Sidebar = ({ selectedUser, setSelectedUser }) => {
             placeholder="Search User..."
           />
         </div>
+        
       </div>
       <div className='flex flex-col gap-2 mt-5'>
          {userDummyData.map((user,index)=>(
