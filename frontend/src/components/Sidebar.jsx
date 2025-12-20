@@ -11,12 +11,12 @@ const Sidebar = ({ selectedUser, setSelectedUser }) => {
       overflow-y-scroll text-white 
       ${selectedUser ? "max-md:hidden" : ""}`}
     >
-      <div className="pb-5 space-y-5">
+      <div className="pb-8 px-1 pt-2">
         
-        <div className="flex justify-between items-center px-1">
-          <div className="flex items-center gap-2.5">
+        <div className="flex items-center justify-between px-1 py-1">
+          <div className="flex items-center gap-3 pl-1 pr-2 py-1 rounded-xl bg-[#1f1838]/70 border border-white/5 shadow-[0_16px_36px_-26px_rgba(118,90,255,0.7)]">
             <img src={assets.logo_icon} alt="logo" className="w-9 h-9" />
-            <span className="text-lg font-semibold">QuickChat</span>
+            <span className="text-2xl font-semibold tracking-wide">QuickChat</span>
           </div>
 
           <div className="relative group">
@@ -43,39 +43,38 @@ const Sidebar = ({ selectedUser, setSelectedUser }) => {
         </div>
 
         <div
-          className="bg-[#282142]/80 backdrop-blur-md 
-          rounded-full flex items-center gap-3 
-          py-3 px-5 shadow-inner border border-white/10"
+          className="bg-[#2b2350]/80 backdrop-blur-xl 
+          rounded-full flex items-center gap-4 
+          py-4 px-7 shadow-[0_16px_40px_-20px_rgba(120,84,255,0.7)] border border-white/10 mt-6"
         >
           <img
             src={assets.search_icon}
             alt="Search"
-            className="w-4 h-4 opacity-70"
+            className="w-5 h-5 opacity-80"
           />
           <input
             type="text"
             className="bg-transparent border-none outline-none 
-            text-white text-sm placeholder-[#b1b1b1] flex-1"
+            text-white text-base placeholder-[#c9c4e5] flex-1"
             placeholder="Search User..."
           />
         </div>
         
       </div>
-      <div className='flex flex-col gap-2 mt-5'>
+      <div className='mt-14 flex flex-col gap-3.5 pr-1'>
          {userDummyData.map((user,index)=>(
-            <div onClick={()=> {setSelectedUser(user)}} key={index} className={`relative flex items-center gap-3 py-3 px-4 rounded-lg cursor-pointer max-sm:text-sm hover:bg-[#282142]/30 transition-colors ${selectedUser?._id === user._id ? 'bg-[#282142]/50' : ''}`}>
+            <div onClick={()=> {setSelectedUser(user)}} key={index} className={`relative flex items-center gap-4 py-3.5 px-5 rounded-2xl cursor-pointer max-sm:text-sm transition-all border border-transparent bg-[#1f1738]/40 hover:bg-[#2d2354]/60 hover:border-violet-400/40 ${selectedUser?._id === user._id ? 'bg-[#3a2d67]/80 border-violet-400/70 shadow-[0_18px_40px_-24px_rgba(140,109,255,0.9)]' : ''}`}>
                 <img src={user?.profilePic || assets.avatar_icon} alt="" 
-                className='w-10 h-10 rounded-full object-cover'/>
+                className='w-11 h-11 rounded-full object-cover'/>
                 <div className='flex flex-col leading-5'>
-                    <p className='text-sm font-medium'>{user.fullName}</p>
+                    <p className='text-sm font-medium tracking-wide'>{user.fullName}</p>
                     {
                         index < 3
-                        ? <span className='text-green-400 text-xs'>Online</span>
-                        :  <span className='text-neutral-400 text-xs'>Offline</span>
+                        ? <span className='text-emerald-400 text-xs flex items-center gap-1'><span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>Online</span>
+                        :  <span className='text-neutral-400 text-xs flex items-center gap-1'><span className="inline-block w-1.5 h-1.5 rounded-full bg-neutral-500"></span>Offline</span>
                     }
             </div>
-            {index > 2 && <p className='absolute top-3 right-3 text-xs h-5 w-5 
-            flex justify-center items-center rounded-full bg-violet-500/50'>{index}</p>}
+            {index > 2 && <p className='absolute top-3 right-4 text-xs h-6 w-6 flex justify-center items-center rounded-full bg-violet-500 text-white shadow-lg'>{index}</p>}
             </div>
          ))}
       </div> 
