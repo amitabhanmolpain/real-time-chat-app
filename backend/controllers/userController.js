@@ -69,7 +69,7 @@ export const checkAuth = (req,res) =>{
 
 
 //cloudinary to update user profile details 
-export const updateProfile = async()=>{
+export const updateProfile = async(req, res)=>{
   try{
     const { profilePic, bio, fullName } = req.body;
 
