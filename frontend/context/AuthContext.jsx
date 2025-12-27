@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState, useEffect } from "react";
 import axios from 'axios'
 import toast from "react-hot-toast";
 import {io} from "socket.io-client" 
@@ -128,7 +128,7 @@ const updateProfile  = async(body)=>{
  
 
     return (
-        <AuthContext.Provider>
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     )
