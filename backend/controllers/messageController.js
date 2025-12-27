@@ -6,7 +6,7 @@ import {io, userSocketMap } from "../server.js";
 
 
 //Get all users except for logged in  user 
-export const getUsersForSidebar  = async ()=>{
+export const getUsersForSidebar  = async (req, res)=>{
     try{
       const userId = req.user._id;
       const filteredUsers = await User.find({_id: {$ne: userId}}).select("-password");
@@ -37,8 +37,8 @@ export const getMessages  = async(req,res) =>{
 
         const messages  = await Message.find({
             $or: [
-                {senderId: myId, recieverId: selectedUserId},
-                {senderId: selectedUserId, recieverId: myId},
+                {senderId: myId, receiverId: selectedUserId},
+                {senderId: selectedUserId, receiverId: myId},
             ]
         })
         await Message.updateMany({senderId: selectedUserId, receiverId: myId},{seen:true});
@@ -68,7 +68,7 @@ export const markMessageAsSeen = async(req,res)=>{
 export const sendMessage = async(req,res) => {
     try {
         const {text, image} = req.body;
-        const recieverId  = req.params.id;
+        const receiverId  = req.params.id;
         const senderId = req.user._id;
 
         let imageUrl;
@@ -78,18 +78,20 @@ export const sendMessage = async(req,res) => {
         }
         const newMessage = await  Message.create({
             senderId,
-            recieverId,
+            receiverId,
             text,
             image: imageUrl 
         })
 
         //Emit the new message to the  recieveer socket id  
-        const recieverSocketId =  userSocketMap[recieverId]
+        const recieverSocketId =  userSocketMap[receiverId]
+        console.log("Receiver socket ID:", recieverSocketId, "for user:", receiverId);
         if(recieverSocketId){
             io.to(recieverSocketId).emit("newMessage",newMessage)
+            console.log("Message emitted to receiver");
         }
 
-
+        res.json({success: true, message: newMessage})
     } catch (error) {
     console.log(error.message);
     res.json({success: false, message: error.message})

@@ -31,54 +31,54 @@ const LoginPage = () => {
       <img src={assets.logo_big} alt="" className='w-[min(30vw,250px)]'/>
       {/*---right --- */}
 
-      <form onSubmit={onSubmitHandler} className='w-full max-w-md border-2 bg-white/8 text-white border-gray-500 px-8 py-8 flex flex-col gap-6 rounded-xl shadow-2xl'>
-        <h2 className='font-medium text-2xl flex justify-between items-center'>
+      <form onSubmit={onSubmitHandler} className='w-full max-w-[380px] border border-white/20 bg-gradient-to-b from-[#1a1432]/95 to-[#0f0c24]/95 backdrop-blur-2xl text-white px-8 py-12 flex flex-col gap-6 rounded-2xl shadow-[0_24px_60px_-12px_rgba(0,0,0,0.8)]'>
+        <h2 className='font-bold text-2xl flex justify-between items-center tracking-wide mb-3'>
           {currState}
-          {isDataSubmitted && <img onClick={()=> setIsDataSubmitted(false)}src={assets.arrow_icon} alt="" className='w-5 cursor-pointer' /> }
+          {isDataSubmitted && <img onClick={()=> setIsDataSubmitted(false)}src={assets.arrow_icon} alt="" className='w-5 cursor-pointer hover:scale-110 transition-transform' /> }
           </h2>
 
         {currState === "Sign up" && !isDataSubmitted &&(
             <input onChange={(e)=>setFullName(e.target.value)} value={fullName}
-             type="text" className='w-full p-3 border border-gray-500 rounded-lg 
-           focus:outline-none focus:ring-2 focus:ring-indigo-500/60' placeholder='Full Name' required/>
+             type="text" className='w-full px-5 py-5 bg-[#0d0820]/60 border border-white/15 rounded-xl text-white placeholder-white/50
+           focus:outline-none focus:ring-2 focus:ring-violet-500/60 focus:border-violet-400/60 transition-all duration-200 text-[15px]' placeholder='Full Name' required/>
         )}
           
         {!isDataSubmitted && (
           <>
           <input onChange={(e)=>setEmail(e.target.value)} value={email}
-           type="email" placeholder='Email Address' required className='w-full p-3 border border-gray-500 rounded-lg focus:outline-none focus:ring-2
-          focus:ring-indigo-500/60'/>
+           type="email" placeholder='Email Address' required className='w-full px-5 py-5 bg-[#0d0820]/60 border border-white/15 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2
+          focus:ring-violet-500/60 focus:border-violet-400/60 transition-all duration-200 text-[15px]'/>
           <input onChange={(e)=>setPassword(e.target.value)} value={password}
-           type="password" placeholder='Password' required className='w-full p-3 border border-gray-500 rounded-lg focus:outline-none focus:ring-2
-          focus:ring-indigo-500/60'/>
+           type="password" placeholder='Password' required className='w-full px-5 py-5 bg-[#0d0820]/60 border border-white/15 rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2
+          focus:ring-violet-500/60 focus:border-violet-400/60 transition-all duration-200 text-[15px]'/>
           </>
         )}
 
           {currState === "Sign up" && isDataSubmitted &&(
             <textarea onChange={(event)=>setBio(event.target.value)} value={bio}
-            rows={4} className='w-full p-3 border border-gray-500 rounded-lg 
-            focus:outline-none focus:ring-2 focus:ring-indigo-500/60'
-           placeholder='provide a short bio...' required></textarea>
+            rows={5} className='w-full px-5 py-5 bg-[#0d0820]/60 border border-white/15 rounded-xl text-white placeholder-white/50
+            focus:outline-none focus:ring-2 focus:ring-violet-500/60 focus:border-violet-400/60 transition-all duration-200 resize-none text-[15px]'
+           placeholder='Tell us about yourself...' required></textarea>
         )
         }
 
-           <button type='submit' className='w-full py-4 bg-linear-to-r from-purple-400 to-violet-600 text-white rounded-lg cursor-pointer text-lg font-semibold'>
+           <button type='submit' className='w-full py-4 bg-gradient-to-r from-[#a76cff] via-[#8c5fff] to-[#6f4dff] text-white rounded-xl cursor-pointer text-base font-bold tracking-wide shadow-[0_20px_46px_-20px_rgba(140,95,255,0.9)] hover:shadow-[0_24px_56px_-20px_rgba(160,108,255,1)] hover:from-[#b97aff] hover:to-[#845dff] hover:scale-[1.02] active:scale-95 transition-all duration-200 mt-4'>
            {currState === "Sign up" ? "Create Account" : "Login Now"}
 
         </button>
 
-        <div className='flex items-center gap-2 text-sm text-gray-500'>
-          <input type="checkbox" />
-          <p>Agree to the terms of use & privacy policy.</p>
+        <div className='flex items-start gap-3 text-sm text-white/60 mt-2'>
+          <input type="checkbox" className='w-4 h-4 mt-0.5 accent-violet-500 cursor-pointer flex-shrink-0' />
+          <p className='leading-relaxed'>Agree to the terms of use & privacy policy.</p>
         </div>
 
-        <div className='flex flex-col gap-2'>
+        <div className='flex flex-col gap-2 mt-1'>
           { currState === "Sign up" ? (
-            <p className='text-sm text-gray-600'>Already have an account? <span onClick={()=> {setCurrState("Login"); setIsDataSubmitted(false)}}
-             className='font-medium text-violet-500 cursor-pointer'>Login here</span></p>
+            <p className='text-sm text-white/60 leading-relaxed'>Already have an account? <span onClick={()=> {setCurrState("Login"); setIsDataSubmitted(false)}}
+             className='font-semibold text-violet-400 cursor-pointer hover:text-violet-300 transition-colors'>Login here</span></p>
           ):(
-            <p className='text-sm text-gray-600'>Create an account <span onClick={() => {setCurrState("Sign up"); setIsDataSubmitted(false)}}
-            className='font-medium text-violet-500 cursor-pointer'>Click here</span></p>
+            <p className='text-sm text-white/60 leading-relaxed'>Create an account <span onClick={() => {setCurrState("Sign up"); setIsDataSubmitted(false)}}
+            className='font-semibold text-violet-400 cursor-pointer hover:text-violet-300 transition-colors'>Click here</span></p>
           )}
         </div>
 
