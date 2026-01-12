@@ -72,6 +72,8 @@ export const getMessages  = async(req,res) =>{
           for(let i = 0; i < updatedMessages.length; i++) {
             await redis.rPush(messagesKey2, updatedMessages[i]);
           }
+          // Set TTL to 1 day (86400 seconds)
+          await redis.expire(messagesKey2, 86400);
         }
 
         res.json({success: true, messages: allMessages})
@@ -141,6 +143,8 @@ export const sendMessage = async(req,res) => {
         // Store message in Redis list
         const messagesKey = `messages:${senderId}:${receiverId}`;
         await redis.rPush(messagesKey, JSON.stringify(newMessage));
+        // Set TTL to 1 day (86400 seconds)
+        await redis.expire(messagesKey, 86400);
 
         //Emit the new message to the  recieveer socket id  
         const recieverSocketId =  userSocketMap[receiverId]
